@@ -9,7 +9,7 @@ WORKDIR $CATALINA_HOME
 
 RUN chgrp -R 0 $CATALINA_HOME && chmod -R g+rw $CATALINA_HOME && find $CATALINA_HOME -type d -exec chmod g+x {} + && rm -rf /usr/local/tomcat/webapps/ROOT
 
-COPY target/insecure-bank.war /usr/local/tomcat/webapps/ROOT.war
+COPY target/insecure-bank.war /usr/local/tomcat/webapps/insecure-bank.war
 
 EXPOSE 8080
 
