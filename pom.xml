@@ -196,5 +196,29 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>${org.spring-security-version}</version>
 		</dependency>
+		
+		<!-- JAXB and Activation added for Java 9 compatibility.
+             The JAXB API is considered to be Java EE API and therefore is
+             no longer contained on the default class path in Java SE 9 -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>${activation.version}</version>
+        </dependency>
 	</dependencies>
 </project>
