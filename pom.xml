@@ -11,6 +11,8 @@
 		<org.springframework-version>4.2.3.RELEASE</org.springframework-version>
 		<org.spring-security-version>4.0.3.RELEASE</org.spring-security-version>
 		<org.slf4j-version>1.7.13</org.slf4j-version>
+		<jaxb.version>2.3.0</jaxb.version>
+        	<activation.version>1.1.1</activation.version>
 	</properties>
 
 	<build>
