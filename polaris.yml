@@ -8,8 +8,7 @@ project:
   revision:
     name: "insecure-bank-ebc"
     date: "2019-07-18T13:25:30Z"
-  projectDir: /var/lib/jenkins/jobs/insecure-bank/workspace
-  captureDir: /var/lib/jenkins/jobs/insecure-bank/workspace/.synopsys/polaris
+  captureDir: .synopsys/polaris
 capture:
   coverity:
     buildless:
