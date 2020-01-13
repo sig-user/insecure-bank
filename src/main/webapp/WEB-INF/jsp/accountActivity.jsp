@@ -12,7 +12,7 @@
 					<div class="col-md-2 col-sm-4 col-xs-7">
 						<a class="btn btn-link btn-off-canvas pull-left"><i class="icon ion-navicon"></i></a>
 						<div class="logo pull-left">
-							<i class="fa fa-university fa-logo"></i> <span class="logo-text">Insecure Bank </span>
+							<i class="fa fa-university fa-logo"></i> <span class="logo-text">SIG Insecure Bank </span>
 						</div>
 					</div>
 					<div class="col-md-10 col-sm-8 col-xs-5">
@@ -121,30 +121,36 @@
 																
 								<div class="widget">
 											<div class="widget-header clearfix">
-												<h3><i class="icon ion-clipboard"></i> <span>ACTIVITY SUMARY | <c:out value="${actualCashAccountNumber}"></c:out></span></h3>
+												<h3><i class="icon ion-clipboard"></i> <span>ACTIVITY SUMMARY | <c:out value="${actualCashAccountNumber}"></c:out></span></h3>
 											</div>
 											<div class="widget-content">
 												<table class="table table-bordered  colored-header">
 													<thead>
-														<tr><th>Date</th><th>Description</th><th>Deposits</th><th>Withdrawals</th><th>Ending Balance</th></tr>
+														<tr><th>Date</th><th>Description</th><th style="text-align:right">Deposits</th><th style="text-align:right">Withdrawals</th><th style="text-align:right">Ending Balance</th></tr>
 													</thead>
 													<tbody>
 													<c:forEach items="${firstCashAccountTransfers}" var="firstCashAccountTransfer">
 														<tr>
-															<td><fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${firstCashAccountTransfer.date}" /></td>
+															<td><fmt:formatDate pattern="MM-dd-yyyy" value="${firstCashAccountTransfer.date}" /></td>
 															<td>${firstCashAccountTransfer.description}</td>
 															
 															<c:if test="${firstCashAccountTransfer.amount > 0}">															
-																<td>+<c:out value="${firstCashAccountTransfer.amount}"/> EUR</td>																		
-																<td></td>																
+																<td align="right">
+<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${firstCashAccountTransfer.amount}" />
+USD</td>																		
+																<td align="right"></td>																
 															</c:if>
 															
 															<c:if test="${firstCashAccountTransfer.amount < 0}">															
-																<td></td>																		
-																<td><c:out value="${firstCashAccountTransfer.amount}"/> EUR</td>																
+																<td align="right"></td>																		
+																<td align="right">
+<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${firstCashAccountTransfer.amount}" />
+USD</td>																
 															</c:if>																	
 																	
-															<td><c:if test="${firstCashAccountTransfer.availablebalance > 0}">+</c:if><c:out value="${firstCashAccountTransfer.availablebalance}"/> EUR</td>									
+															<td align="right"><c:if test="${firstCashAccountTransfer.availablebalance > 0}"></c:if>
+<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${firstCashAccountTransfer.availablebalance}" />
+USD</td>									
 														</tr>
 													</c:forEach>
 													</tbody>

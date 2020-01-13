@@ -13,7 +13,7 @@
 						<a class="btn btn-link btn-off-canvas pull-left"><i
 							class="icon ion-navicon"></i></a>
 						<div class="logo pull-left">
-							<i class="fa fa-university fa-logo"></i> <span class="logo-text">Insecure Bank </span>
+							<i class="fa fa-university fa-logo"></i> <span class="logo-text">SIG Insecure Bank </span>
 						</div>
 					</div>
 					<div class="col-md-10 col-sm-8 col-xs-5">
@@ -143,7 +143,7 @@
 												<div class="col-sm-10">
 												<div class="input-group">
 													<form:input path="amount" type="text" class="form-control" />
-													<span class="input-group-addon">&#8364;</span>
+													<span class="input-group-addon">USD</span>
 												</div>
 												<form:errors path="amount" cssClass="text-danger" />																								
 												</div>

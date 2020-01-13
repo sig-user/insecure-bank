@@ -13,7 +13,7 @@
 						<a class="btn btn-link btn-off-canvas pull-left"><i
 							class="icon ion-navicon"></i></a>
 						<div class="logo pull-left">
-							<i class="fa fa-university fa-logo"></i> <span class="logo-text">Insecure Bank </span>
+							<i class="fa fa-university fa-logo"></i> <span class="logo-text">SIG Insecure Bank </span>
 						</div>
 					</div>
 					<div class="col-md-10 col-sm-8 col-xs-5">
@@ -133,11 +133,11 @@
 												</tr>
 												<tr>
 													<td><label class="col-md-4 control-label">Amount</label></td>
-													<td><c:out value="${transferbean.amount}" /> &#8364;</td>
+													<td><c:out value="${transferbean.amount}" /> USD</td>
 												</tr>
 												<tr>
 													<td><label class="col-md-4 control-label">Fee</label></td>
-													<td><c:out value="${transferbean.fee}" /> &#8364;</td>
+													<td><c:out value="${transferbean.fee}" /> USD</td>
 												</tr>
 												<tr>
 													<td><label class="col-md-4 control-label">Date</label></td>

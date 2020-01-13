@@ -13,7 +13,7 @@
 						<a class="btn btn-link btn-off-canvas pull-left"><i
 							class="icon ion-navicon"></i></a>
 						<div class="logo pull-left">
-							<i class="fa fa-university fa-logo"></i> <span class="logo-text">Insecure Bank </span>
+							<i class="fa fa-university fa-logo"></i> <span class="logo-text">SIG Insecure Bank </span>
 						</div>
 					</div>
 					<div class="col-md-10 col-sm-8 col-xs-5">
@@ -108,11 +108,11 @@
 											</tr>
 											<tr>
 												<td><label class="col-md-4 control-label">Amount</label></td>
-												<td><c:out value="${transferbean.amount}" /> &#8364;</td>
+												<td><c:out value="${transferbean.amount}" /> USD</td>
 											</tr>
 											<tr>
 												<td><label class="col-md-4 control-label">Fee</label></td>
-												<td><c:out value="${transferbean.fee}" /> &#8364;</td>
+												<td><c:out value="${transferbean.fee}" /> USD</td>
 											</tr>									
 										</tbody>
 									</table>
@@ -122,14 +122,14 @@
 								<div class="widget">
 									<div class="widget-header clearfix">
 										<h3>
-											<i class="fa fa-list-alt"></i> <span>Find the number 243 and enter the corresponding code:</span>
+											<i class="fa fa-list-alt"></i> <span>Enter the confirmation number 243:</span>
 										</h3>
 									</div>
 									<div class="widget-content">										
     									<form:form method="POST" class="form-horizontal" role="form" commandName="operationConfirm" action="transfer/confirm">								
 											<spring:bind path="code">											
 											<div class="form-group">
-												<label class="col-md-2 control-label">Code</label>
+												<label class="col-md-2 control-label">Confirmation number</label>
 												<div class="col-md-1">
 													<form:input path="code" type="text" class="form-control" maxlength="4"/>
 												</div>

@@ -4,10 +4,10 @@
 <!--[if IE 9 ]><html class="ie ie9" lang="en" class="no-js"> <![endif]-->
 <!--[if !(IE)]><!--><html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-	<title>Insecure Bank</title>
+	<title>SIG Insecure Bank</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description" content="Insecure Bank">
+	<meta name="description" content="SIG Insecure Bank">
 	<meta name="author" content="The Develovers">
 
 	<!-- CSS -->

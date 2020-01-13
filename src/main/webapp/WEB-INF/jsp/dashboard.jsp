@@ -12,7 +12,7 @@
 					<div class="col-md-2 col-sm-4 col-xs-7">
 						<a class="btn btn-link btn-off-canvas pull-left"><i class="icon ion-navicon"></i></a>
 						<div class="logo pull-left">
-							<i class="fa fa-university fa-logo"></i> <span class="logo-text">Insecure Bank </span>
+							<i class="fa fa-university fa-logo"></i> <span class="logo-text">SIG Insecure Bank </span>
 						</div>
 					</div>
 					<div class="col-md-10 col-sm-8 col-xs-5">
@@ -108,7 +108,7 @@
 													<tr>
 														<th>Cash Account</th>
 														<th>Description</th>										
-														<th>Available Balance</th>
+														<th style="text-align:right">Available Balance</th>
 														<th style="width: 140px;"></th>
 													</tr>
 												</thead>
@@ -119,8 +119,11 @@
 															</spring:url>
 															<td><c:out value="${cash.number}"/></td>
 															<td><c:out value="${cash.description}"/></td>																		
-															<td><c:if test="${cash.availableBalance > 0}">+</c:if><c:out value="${cash.availableBalance}"/> EUR</td>	
-															<td><a href="${url}" class="btn btn-primary btn-xs"><i class="fa fa-search"></i> View activity</a></td>		
+															<td align="right"><c:if test="${cash.availableBalance > 0}"></c:if><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${cash.availableBalance}" /> USD
+
+</td>
+
+<td><a href="${url}" class="btn btn-primary btn-xs"><i class="fa fa-search"></i> View activity</a></td>		
 													</c:forEach>
 												</tbody>
 											</table>
@@ -140,7 +143,7 @@
 													<tr>
 														<th>Cash Account</th>
 														<th>Description</th>										
-														<th>Available Balance</th>
+														<th style="text-align:right">Available Balance</th>
 														<th style="width: 140px;"></th>
 													</tr>
 												</thead>
@@ -159,7 +162,7 @@
 															</c:if>																														
 															<c:out value="${credit.number}"/></td>
 															<td><c:out value="${credit.description}"/></td>																		
-															<td><c:if test="${credit.availableBalance > 0}">+</c:if><c:out value="${credit.availableBalance}"/> EUR</td>	
+															<td align="right"><c:if test="${credit.availableBalance > 0}"></c:if><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${credit.availableBalance}" /> USD</td>	
 															<spring:url value="/activity/credit.html?number=${credit.number}" var="url">
 															</spring:url>
 															<td><a href="${url}" class="btn btn-primary btn-xs"><i class="fa fa-search"></i> View activity</a></td>									

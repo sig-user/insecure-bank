@@ -12,7 +12,7 @@
 					<div class="col-md-2 col-sm-4 col-xs-7">
 						<a class="btn btn-link btn-off-canvas pull-left"><i class="icon ion-navicon"></i></a>
 						<div class="logo pull-left">
-							<i class="fa fa-university fa-logo"></i> <span class="logo-text">Insecure Bank </span>
+							<i class="fa fa-university fa-logo"></i> <span class="logo-text">SIG Insecure Bank </span>
 						</div>
 					</div>
 					<div class="col-md-10 col-sm-8 col-xs-5">
@@ -99,23 +99,23 @@
 																
 								<div class="widget">
 											<div class="widget-header clearfix">
-												<h3><i class="icon ion-clipboard"></i> <span>ACTIVITY SUMARY | <c:out value="${actualCreditCardNumber}"></c:out></span></h3>
+												<h3><i class="icon ion-clipboard"></i> <span>ACTIVITY SUMMARY | <c:out value="${actualCreditCardNumber}"></c:out></span></h3>
 											</div>
 											<div class="widget-content">
 												<table class="table table-bordered  colored-header">
 													<thead>
-														<tr><th>Date</th><th>Description</th><th>Charge</th></tr>
+														<tr><th>Date</th><th>Description</th><th style="text-align:right">Charge</th></tr>
 													</thead>
 													<tbody>
 													<tr>
-															<td>14-04-2017</td>
+															<td>04-14-2019</td>
 															<td>Amazon Inc.</td>
-															<td>120.30 EUR</td>		
+															<td align="right">120.30 USD</td>		
 													</tr>
 													<tr>
-															<td>13-04-2017</td>
-															<td>Vodafone</td>
-															<td>20.10 EUR</td>		
+															<td>04-13-2019</td>
+															<td>Verizon</td>
+															<td align="right">20.10 USD</td>		
 													</tr>
 													</tbody>
 												</table>

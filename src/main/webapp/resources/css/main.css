@@ -4754,7 +4754,7 @@ a.editable-click.editable-disabled:hover {
 /*------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   color: #696565;
   line-height: 1.6;
   background: #f2f2f2;
@@ -5349,19 +5349,19 @@ select.input-sm {
   color: #696565;
 }
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active {
-  color: #696565;
+  color: #147da0;
 }
 
 .btn-primary {
-  background-color: #1688ae;
+  background-color: #5A2D83;
   border-color: #137697;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-  background-color: #147da0;
+  background-color: #80539C;
   border-color: #106581;
 }
 .btn-primary.disabled, .btn-primary[disabled], .btn-primary.disabled:hover, .btn-primary[disabled]:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, .btn-primary.disabled.active, .btn-primary[disabled].active {
-  background-color: #1cabdb;
+  background-color: #80539C;
   color: #fff;
 }
 
@@ -5370,7 +5370,7 @@ select.input-sm {
   border-color: #44aeda;
 }
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active {
-  background-color: #44aeda;
+  background-color: #147da0;
   border-color: #2ea5d6;
 }
 .btn-info.disabled, .btn-info[disabled], .btn-info.disabled:hover, .btn-info[disabled]:hover, .btn-info.disabled:focus, .btn-info[disabled]:focus, .btn-info.disabled:active, .btn-info[disabled]:active, .btn-info.disabled.active, .btn-info[disabled].active {
@@ -7072,7 +7072,7 @@ td.legendLabel {
   margin: 0 5px;
 }
 .headline .bottom-stat .stat-item .number {
-  font-family: "josefinslab-semibold";
+  font-family: "Open Sans";
   font-size: 2.8em;
   line-height: 1.1;
 }
@@ -7864,7 +7864,7 @@ div[class*="col-"] > .form-group {
   z-index: 1;
 }
 .main-nav h3 {
-  font-family: "josefinslab-semibold";
+  font-family: "Open Sans";
   margin: 30px 10px 15px;
   padding-bottom: 10px;
   font-size: 1.3em;
@@ -7964,7 +7964,7 @@ ul.main-menu li a {
   display: block;
   position: relative;
   padding: 12px 0 12px 15px;
-  font-size: 13px;
+  font-size: 14px;
   color: #8d8d8d;
 }
 ul.main-menu li a:hover, ul.main-menu li a:focus {
@@ -8187,7 +8187,7 @@ ul.main-menu .sub-menu li.active a {
   margin-bottom: 30px;
 }
 .heading h2 {
-  font-family: "josefinslab-semibold";
+  font-family: "Open Sans";
   margin-bottom: 0;
 }
 @media screen and (max-width: 480px) {
@@ -8451,7 +8451,7 @@ ul.widget-inbox-list .timestamp {
 }
 .portlet h3 {
   margin: 0 0 30px 0;
-  font-family: "josefinslab-semibold";
+  font-family: "Open Sans";
   font-size: 27px;
   border-bottom: 1px solid #fff;
 }
@@ -8663,7 +8663,7 @@ ul.chat-contacts.contacts-offline > li a, ul.chat-contacts.contacts-offline > li
   border: 2px solid #fff;
 }
 .profile-info-left h2 {
-  font-family: "josefinslab-semibold";
+  font-family: "Open Sans";
   margin-bottom: 30px;
 }
 .profile-info-left .section {
@@ -9213,7 +9213,7 @@ ul.nav-categories > li > a:hover {
 }
 .page-404 h1,
 .page-505 h1 {
-  font-family: "josefinslab-semibold";
+  font-family: "Open Sans";
   font-size: 12em;
   line-height: 1;
 }

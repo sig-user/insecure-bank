@@ -48,10 +48,10 @@
 			</div>
 			<div class="col-sm-5 col-lg-4">
 				<div class="login-copytext">
-					<h2>Welcome to <i class="fa fa-university fa-logo"></i><span class="logo-text">Insecure Bank </span></h2>
-					<p> Log in to access your checking, savings, credit cards, and mortgage accounts with Insecure Bank.</p>
+					<h2>Welcome to <i class="fa fa-university fa-logo"></i><span class="logo-text">SIG Insecure Bank </span></h2>
+					<p> Log in to access your checking, savings, credit cards, and mortgage accounts with SIG Insecure Bank.</p>
 					<h2>Online Payments</h2>
-					<p>Using your Insecure Bank account, you can pay your bills like electricity, telephone, satellite television, mobile phone etc. You can also pay your insurance premium, credit card bills etc.</p>
+					<p>Using your SIG Insecure Bank account, you can pay your bills like electricity, telephone, satellite television, mobile phone etc. You can also pay your insurance premium, credit card bills etc.</p>
 				</div>
 			</div>
 		</div>

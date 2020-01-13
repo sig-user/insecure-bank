@@ -107,7 +107,7 @@
 											<dt>Current Date:</dt>
 											<dd>${now}</dd>										
 											<dt>Register Date:</dt>
-											<dd>20-09-2014</dd>
+											<dd>09-20-2019</dd>
 											<dt>Username:</dt>
 											<dd>${account.username}</dd>
 											<dt>Name:</dt>
