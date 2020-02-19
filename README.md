@@ -1,17 +1,32 @@
 # Insecure Bank
-![Insecure-Bank](https://hdivsecurity.com/img/bank.png)
-## Running the application locally
 
-1. Clone the repository:
+## Building
 
-        $ git clone https://github.com/hdiv/insecure-bank.git
-2. Run the application using an embedded Tomcat:
+```
+sudo apt install -y openjdk-11-jdk
+sudo apt install -y maven
+```
 
-	    $ mvn clean package
-	    $ mvn cargo:run
-	    
-3. You can then access the bank application here: http://localhost:8080/insecure-bank/
+Now clone this repository.
+
+```
+cd insecure-bank
+mvn clean package
+```
+
+## Running
+
+```
+sudo apt install -y docker.io
+sudo docker build -t wildfly .
+sudo docker run --rm -it -p 8080:8080 wildfly
+```
+
+You can then access the bank application here: http://localhost:8080/
 
 ## Login credentials
-- username: john
+
+See the file [src/main/resources/db/dataload.sql](src/main/resources/db/dataload.sql) for all example accounts. Here is one:
+
+- username: john@example.com
 - password: test

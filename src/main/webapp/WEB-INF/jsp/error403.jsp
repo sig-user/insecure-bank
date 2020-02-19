@@ -9,6 +9,6 @@
 </head>
 <body>
     <div class="cover"><h1>Access Denied <small>Error 403</small></h1><p class="lead">The requested resource requires an authentication.</p></div>
-    <footer><p>Technical Contact: <a href="mailto:support@hdivsecurity.com">support@hdivsecurity.com</a></p></footer>
+    <footer><p>Technical Contact: <a href="mailto:support@example.com">support@example.com</a></p></footer>
 </body>
 </html>
