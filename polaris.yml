@@ -3,11 +3,11 @@ install:
   coverity:
     version: latest
 project:
-  name: "xenserverarmy/insecure-bank/"
+  name: "SIG Insecure Bank - SSDC"
   branch: "origin/master"
   revision:
-    name: "insecure-bank-ebc"
-    date: "2019-07-18T13:25:30Z"
+    name: "insecure-bank-ssdc"
+    date: "2020-08-18T14:25:30Z"
   captureDir: .synopsys/polaris
 capture:
   coverity:
