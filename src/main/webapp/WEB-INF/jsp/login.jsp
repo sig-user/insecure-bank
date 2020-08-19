@@ -2,6 +2,20 @@
 <%@ include file="/WEB-INF/jsp/template/header.jsp"%>
 
 <body class="middle-content page-login">
+	<!-- TOP BAR -->
+	<nav class="top-bar navbar-fixed-top" role="navigation">
+		<div class="row">
+			<div class="col-md-4 col-sm-4 col-xs-7">
+				<div class="logo pull-left">
+					<img src="resources/img/synopsys_wht.png"/>
+					&nbsp; &nbsp;
+					<i class="fa fa-university fa-logo"></i> <span class="logo-text">SIG Insecure Bank </span>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- END TOP BAR -->
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-5 col-sm-offset-1 col-lg-4 col-lg-offset-2">
@@ -48,10 +62,11 @@
 			</div>
 			<div class="col-sm-5 col-lg-4">
 				<div class="login-copytext">
-					<h2>Welcome to <i class="fa fa-university fa-logo"></i><span class="logo-text">SIG Insecure Bank </span></h2>
-					<p> Log in to access your checking, savings, credit cards, and mortgage accounts with SIG Insecure Bank.</p>
-					<h2>Online Payments</h2>
-					<p>Using your SIG Insecure Bank account, you can pay your bills like electricity, telephone, satellite television, mobile phone etc. You can also pay your insurance premium, credit card bills etc.</p>
+					<h2>Welcome!</h2>
+					<p> Log in to access your checking, savings, credit cards, and mortgage accounts.</p>
+					<h2>Financial Security</h2>
+					<p>Check balances, make transfers, make payments, and make toast. Is it secure?
+					Absolutely not! Can you pay your rocket fuel bill quickly? Of course!</p>
 				</div>
 			</div>
 		</div>
@@ -65,12 +80,16 @@
 </body>
 <style>
 .fa-logo {
-	font-size: 23px;
+	color: #fff;
+	font-size: 18px;
 }
 
 .logo-text {
+	color: #fff;
 	font-family: 'Oswald';
-	font-size: 19px;	
+	font-size: 16px;	
 }
+
+
 </style>	
 <%@ include file="/WEB-INF/jsp/template/footer.jsp"%>

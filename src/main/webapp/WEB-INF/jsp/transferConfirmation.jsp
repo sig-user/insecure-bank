@@ -9,14 +9,16 @@
 			<!-- TOP BAR -->
 			<nav class="top-bar navbar-fixed-top" role="navigation">
 				<div class="row">
-					<div class="col-md-2 col-sm-4 col-xs-7">
+					<div class="col-md-6 col-sm-6 col-xs-6">
 						<a class="btn btn-link btn-off-canvas pull-left"><i
 							class="icon ion-navicon"></i></a>
 						<div class="logo pull-left">
+							<img src="../resources/img/synopsys_wht.png"/>
+							&nbsp; &nbsp;
 							<i class="fa fa-university fa-logo"></i> <span class="logo-text">SIG Insecure Bank </span>
 						</div>
 					</div>
-					<div class="col-md-10 col-sm-8 col-xs-5">
+					<div class="col-md-6 col-sm-6 col-xs-6">
 						<div class="row">
 							<div class="col-md-4 col-sm-4"></div>
 							<div class="col-md-8 col-sm-8">
@@ -105,7 +107,7 @@
 									</div>
 									<div class="widget-content">
 									<div class="alert alert-success fade in">
-											<button class="close" data-dismiss="alert">×</button>
+											<button class="close" data-dismiss="alert">Ã—</button>
 											<i class="icon ion-checkmark-circled"></i>
 											<strong>Success!</strong> You have successfully made the transfer.
 										</div>

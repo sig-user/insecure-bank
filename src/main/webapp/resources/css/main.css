@@ -8279,7 +8279,7 @@ ul.widget-inbox-list .timestamp {
 .widget .widget-header h3, .widget.widget-no-header h3 {
   margin-top: 0;
   font-size: 14px;
-  color: #6a6a6a;
+  color: #000000;
 }
 .widget .widget-header {
   padding: 0 10px;
@@ -9297,11 +9297,13 @@ ul.nav-categories > li > a:hover {
 }
 
 .page-login .top-bar {
+  /*
   margin: 0;
   padding: 10px 0;
+  */
 }
 .page-login .top-bar img {
-  width: 140px;
+  /*width: 140px;*/
 }
 .page-login .container-fluid {
   margin-top: 14em;

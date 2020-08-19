@@ -66,7 +66,7 @@
 }
 
 ul.main-menu li.active a {
-  background-color: #888;
+  background-color: #5A2A82;
 }
 ul.main-menu li.active a.submenu-toggle {
   color: #8d8d8d;
@@ -75,7 +75,7 @@ ul.main-menu li a:hover, ul.main-menu li a:focus {
   background-color: #888;
 }
 ul.main-menu .sub-menu li.active a {
-  background-color: #888;
+  background-color: #5A2A82;
   color: #fff;
 }
 ul.main-menu .sub-menu li a {
