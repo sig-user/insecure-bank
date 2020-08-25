@@ -111,7 +111,7 @@ pipeline {
                         deploy: container('maven') {
                             echo "This is branch a"
                         },
-                        deploy-with-seeker: container('maven') {
+                        seeker: container('maven') {
                             echo "This is branch b"
                         }
                     )
