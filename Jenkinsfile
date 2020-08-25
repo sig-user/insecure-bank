@@ -52,24 +52,17 @@ pipeline {
                     }
                 }
             }
-            post{
-                success{
-                    echo "Code Analysis Successfully"
-                }
-                failure{
-                    echo "Code Analysis Failed"
-                }
-            }
         }
   
         stage('Automated Testing') {
             steps {
-              //put your Testing
-              container('maven') {
-                  echo 'Robot Testing Start'
-                  sh 'mvn test'
-              }
+                //put your Testing
+                container('maven') {
+                    echo 'Robot Testing Start'
+                    echo 'mvn test'
+                }
             }
+
             post{
                 success{
                     echo "Automated Testing Successfully"
@@ -78,10 +71,11 @@ pipeline {
                     echo "Automated Testing Failed"
                 }
             }
+            
         }
 
         stage('Open Source Composition Scan') {
-              steps {
+            steps {
                 container('maven') {
                     //Put your image scanning tool 
                     echo 'Open Source Scanning Start'
@@ -95,22 +89,23 @@ pipeline {
                     //     --detect.tools="DETECTOR" \
                     //     --detect.project.version.name="DETECTOR_${BUILD_TAG}"'
                 }
-              }
-                post{
-                    success{
-                        echo "Composition Scanning Successfully"
-                    }
-                    failure{
-                        echo "Composition Scanning Failed"
-                    }
-                }
             }
 
+            post{
+                success{
+                    echo "Composition Scanning Successfully"
+                }
+                failure{
+                    echo "Composition Scanning Failed"
+                }
+            }
+        }
+
         stage("Deploy to Staging w IAST"){
-              when {
-                  branch 'cloudbees-ci'
-              }
-              parallel {
+            when {
+                branch 'cloudbees-ci'
+            }
+            parallel {
                 stage('Deploy') {
                     steps {
                         container('maven') {
@@ -125,33 +120,25 @@ pipeline {
                         }
                     }
                 }
-              }
-              post{
-                  success{
-                      echo "Successfully deployed to Staging"
-                  }
-                  failure{
-                      echo "Failed deploying to Staging"
-                  }
-              }
-          }
+            }
+        }
 
         stage("Deploy to Production"){
-                when {
-                    branch 'master'
+            when {
+                branch 'master'
+            }
+            steps { 
+                kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+            }
+            post{
+                success{
+                    echo "Successfully deployed to Production"
                 }
-                steps { 
-                    kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
-                }
-                post{
-                    success{
-                        echo "Successfully deployed to Production"
-                    }
-                    failure{
-                        echo "Failed deploying to Production"
-                    }
+                failure{
+                    echo "Failed deploying to Production"
                 }
             }
+        }
 
       }
         
