@@ -77,6 +77,7 @@ pipeline {
                         --detect.tools="DETECTOR" \
                         --detect.project.version.name="DETECTOR_${BUILD_TAG}"'
                 }
+              }
                 post{
                     success{
                         echo "Composition Scanning Successfully"
@@ -85,7 +86,6 @@ pipeline {
                         echo "Composition Scanning Failed"
                     }
                 }
-              }
             }
 
         stage("Deploy to Staging"){
