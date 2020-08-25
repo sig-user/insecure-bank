@@ -66,10 +66,10 @@ pipeline {
               steps {
                 container('maven') {
                     //Put your image scanning tool 
-                    echo 'Image Scanning Start'
-                    sh 'curl -O https://detect.synopsys.com/detect.sh'
-                    sh 'chmod +x detect.sh'
-                    sh './detect.sh \
+                    echo 'Open Source Scanning Start'
+                    sh 'curl -O https://detect.synopsys.com/detect.sh && \
+                        chmod +x detect.sh && \
+                        ./detect.sh \
                         --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                         --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                         --blackduck.trust.cert=true \
