@@ -110,7 +110,7 @@ pipeline {
               when {
                   branch 'cloudbees-ci'
               }
-              sparallel {
+              parallel {
                 stage('Deploy') {
                     steps {
                         container('maven') {
@@ -125,7 +125,7 @@ pipeline {
                         }
                     }
                 }
-            }
+              }
               post{
                   success{
                       echo "Successfully deployed to Staging"
