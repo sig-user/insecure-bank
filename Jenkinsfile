@@ -141,7 +141,7 @@ pipeline {
                     branch 'master'
                 }
                 steps { 
-                    // kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+                    kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
                 }
                 post{
                     success{
