@@ -40,14 +40,14 @@ pipeline {
                 stage('Build') {
                     steps {
                         container('maven') {
-                            sh 'Build w/o SAST'
+                            echo 'Build w/o SAST'
                         }
                     }
                 }
                 stage('SAST Analysis') {
                     steps {
                         container('maven') {
-                            sh 'Build w SAST'
+                            echo 'Build w SAST'
                         }
                     }
                 }
@@ -114,14 +114,14 @@ pipeline {
                 stage('Deploy') {
                     steps {
                         container('maven') {
-                            sh 'Build w/o SAST'
+                            echo 'Deploy w/o IAST'
                         }
                     }
                 }
                 stage('Deploy with Seeker IAST') {
                     steps {
                         container('maven') {
-                            sh 'Build w SAST'
+                            echo 'Deploy w IAST'
                         }
                     }
                 }
