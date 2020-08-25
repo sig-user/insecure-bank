@@ -37,15 +37,16 @@ pipeline {
         stage('Static Code Analysis') {           
             steps {
               //put your code scanner 
-
-              parallel(
-                build: container('maven') {
-                    echo "This is branch a"
-                },
-                sast: container('maven') {
-                    echo "This is branch b"
-                }
-              )
+            container('maven') {
+                parallel(
+                    build: {
+                        echo "This is branch a"
+                    },
+                    sast: container('maven') {
+                        echo "This is branch b"
+                    }
+                )
+              }
             }
             post{
                 success{
@@ -107,14 +108,16 @@ pipeline {
               }
               steps {
                    // kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+                container('maven') {
                     parallel(
-                        deploy: container('maven') {
+                        deploy: {
                             echo "This is branch a"
                         },
-                        seeker: container('maven') {
+                        seeker: {
                             echo "This is branch b"
                         }
                     )
+                }
               }
               post{
                   success{
