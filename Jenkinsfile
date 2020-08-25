@@ -37,10 +37,15 @@ pipeline {
         stage('Static Code Analysis') {           
             steps {
               //put your code scanner 
-              container('maven') {
-                echo 'Code Scanning and Analysis'
-                sh 'mvn -Dmaven.test.skip=true clean package'
-              }
+
+              parallel(
+                build: container('maven') {
+                    echo "This is branch a"
+                },
+                sast: container('maven') {
+                    echo "This is branch b"
+                }
+              )
             }
         }
   
@@ -90,10 +95,10 @@ pipeline {
 
         stage("Deploy to Staging"){
               when {
-                  branch 'staging'
+                  branch 'cloudbees-ci'
               }
               steps {
-                  kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+                   // kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
               }
               post{
                   success{
@@ -107,19 +112,10 @@ pipeline {
 
         stage("Deploy to Production"){
                 when {
-                    branch 'cloudbees-ci'
+                    branch 'master'
                 }
                 steps { 
                     // kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
-                    parallel(
-                        a: {
-                            echo "This is branch a"
-                        },
-                        b: {
-                            echo "This is branch b"
-                            sh 'docker ps'
-                        }
-                    )
                 }
                 post{
                     success{
