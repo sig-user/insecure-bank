@@ -34,19 +34,23 @@ pipeline {
             }
         }
 
-        stage('Static Code Analysis') {           
-            steps {
-              //put your code scanner 
-            container('maven') {
-                parallel(
-                    build: {
-                        echo "This is branch a"
-                    },
-                    sast: container('maven') {
-                        echo "This is branch b"
+        stage('Static Code Analysis') { 
+            //put your code scanner 
+            parallel {
+                stage('Build') {
+                    steps {
+                        container('maven') {
+                            sh 'Build w/o SAST'
+                        }
                     }
-                )
-              }
+                }
+                stage('SAST Analysis') {
+                    steps {
+                        container('maven') {
+                            sh 'Build w SAST'
+                        }
+                    }
+                }
             }
             post{
                 success{
@@ -106,19 +110,22 @@ pipeline {
               when {
                   branch 'cloudbees-ci'
               }
-              steps {
-                   // kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
-                container('maven') {
-                    parallel(
-                        deploy: {
-                            echo "This is branch a"
-                        },
-                        seeker: {
-                            echo "This is branch b"
+              sparallel {
+                stage('Deploy') {
+                    steps {
+                        container('maven') {
+                            sh 'Build w/o SAST'
                         }
-                    )
+                    }
                 }
-              }
+                stage('Deploy with Seeker IAST') {
+                    steps {
+                        container('maven') {
+                            sh 'Build w SAST'
+                        }
+                    }
+                }
+            }
               post{
                   success{
                       echo "Successfully deployed to Staging"
