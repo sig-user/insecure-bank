@@ -47,6 +47,14 @@ pipeline {
                 }
               )
             }
+            post{
+                success{
+                    echo "Code Analysis Successfully"
+                }
+                failure{
+                    echo "Code Analysis Failed"
+                }
+            }
         }
   
         stage('Automated Testing') {
@@ -72,15 +80,15 @@ pipeline {
                 container('maven') {
                     //Put your image scanning tool 
                     echo 'Open Source Scanning Start'
-                    sh 'curl -O https://detect.synopsys.com/detect.sh && \
-                        chmod +x detect.sh && \
-                        ./detect.sh \
-                        --blackduck.url="https://bizdevhub.blackducksoftware.com" \
-                        --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
-                        --blackduck.trust.cert=true \
-                        --detect.project.name="CloudBeesDucky" \
-                        --detect.tools="DETECTOR" \
-                        --detect.project.version.name="DETECTOR_${BUILD_TAG}"'
+                    // sh 'curl -O https://detect.synopsys.com/detect.sh && \
+                    //     chmod +x detect.sh && \
+                    //     ./detect.sh \
+                    //     --blackduck.url="https://bizdevhub.blackducksoftware.com" \
+                    //     --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
+                    //     --blackduck.trust.cert=true \
+                    //     --detect.project.name="CloudBeesDucky" \
+                    //     --detect.tools="DETECTOR" \
+                    //     --detect.project.version.name="DETECTOR_${BUILD_TAG}"'
                 }
               }
                 post{
@@ -93,12 +101,20 @@ pipeline {
                 }
             }
 
-        stage("Deploy to Staging"){
+        stage("Deploy to Staging w IAST"){
               when {
                   branch 'cloudbees-ci'
               }
               steps {
                    // kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+                    parallel(
+                        deploy: container('maven') {
+                            echo "This is branch a"
+                        },
+                        deploy-with-seeker: container('maven') {
+                            echo "This is branch b"
+                        }
+                    )
               }
               post{
                   success{
