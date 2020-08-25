@@ -30,7 +30,6 @@ pipeline {
         stage('Initial Notification') {
             steps {
                  //put webhook for your notification channel 
-                 sh 'ls'
                  echo 'Pipeline Start Notification'
             }
         }
@@ -40,7 +39,7 @@ pipeline {
               //put your code scanner 
               container('maven') {
                 echo 'Code Scanning and Analysis'
-                sh 'mvn clean package'
+                sh 'mvn -Dmaven.test.skip=true clean package'
               }
             }
         }
@@ -68,7 +67,7 @@ pipeline {
                 container('maven') {
                     //Put your image scanning tool 
                     echo 'Image Scanning Start'
-                    sh 'wget https://detect.synopsys.com/detect.sh'
+                    sh 'curl -O https://detect.synopsys.com/detect.sh'
                     sh 'chmod +x detect.sh'
                     sh './detect.sh \
                         --blackduck.url="https://bizdevhub.blackducksoftware.com" \
