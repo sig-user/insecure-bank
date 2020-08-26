@@ -52,7 +52,7 @@ pipeline {
                                 sourceDir=$(pwd) && \
                                 cd $POLARIS_HOME || exit && \
                                 wget "https://sipse.polaris.synopsys.com/api/tools/polaris_cli-linux64.zip && \
-                                DIR=$(zipinfo -1 polaris_cli-linux64.zip | grep -oE '^[^/]+' | uniq) && \ 
+                                DIR=$(zipinfo -1 polaris_cli-linux64.zip | grep -oE "^[^/]+" | uniq) && \ 
                                 unzip polaris_cli-linux64.zip && rm polaris_cli-linux64.zip && \
                                 cd "${DIR}"/bin || exit && \
                                 polaris=$(pwd)/polaris && \
