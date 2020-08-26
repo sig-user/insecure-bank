@@ -34,13 +34,14 @@ pipeline {
             }
         }
 
-        stage('Build Phase') { 
+        stage('Commit Time Checks') { 
             //put your code scanner 
             parallel {
-                stage('mvn package') {
+                stage('build') {
                     steps {
                         container('maven') {
                             echo 'Build w/o SAST'
+                            sh 'mvn clean package'
                         }
                     }
                 }
@@ -71,7 +72,7 @@ pipeline {
                 //put your Testing
                 container('maven') {
                     echo 'Robot Testing Start'
-                    echo 'mvn test'
+                    sh 'mvn test'
                 }
             }
 
@@ -86,29 +87,46 @@ pipeline {
             
         }
 
-        stage('Open Source Composition Scan') {
+        stage('Build Time Checks') {
             steps {
                 container('maven') {
                     //Put your image scanning tool 
                     echo 'Open Source Scanning Start'
-                    // sh 'curl -O https://detect.synopsys.com/detect.sh && \
-                    //     chmod +x detect.sh && \
-                    //     ./detect.sh \
-                    //     --blackduck.url="https://bizdevhub.blackducksoftware.com" \
-                    //     --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
-                    //     --blackduck.trust.cert=true \
-                    //     --detect.project.name="CloudBeesDucky" \
-                    //     --detect.tools="DETECTOR" \
-                    //     --detect.project.version.name="DETECTOR_${BUILD_TAG}"'
+                    sh 'curl -O https://detect.synopsys.com/detect.sh && \
+                        chmod +x detect.sh && \
+                        ./detect.sh \
+                        --blackduck.url="https://bizdevhub.blackducksoftware.com" \
+                        --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
+                        --blackduck.trust.cert=true \
+                        --detect.project.name="CloudBeesDucky" \
+                        --detect.tools="DETECTOR" \
+                        --detect.project.version.name="DETECTOR_${BUILD_TAG}"'
                 }
             }
 
             post{
                 success{
-                    echo "Composition Scanning Successfully"
+                    echo "Software Composition Scanning Successfully"
                 }
                 failure{
-                    echo "Composition Scanning Failed"
+                    echo "Software Composition Scanning Failed"
+                }
+            }
+        }
+
+        stage("Testing"){
+            when {
+                branch 'test'
+            }
+            steps { 
+                kubernetesDeploy kubeconfigId: 'kubeconfig-credentials-id', configs: 'build-pod.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+            }
+            post{
+                success{
+                    echo "Successfully deployed to Testing"
+                }
+                failure{
+                    echo "Failed deploying to Testing"
                 }
             }
         }
@@ -120,16 +138,14 @@ pipeline {
             parallel {
                 stage('Deploy') {
                     steps {
-                        container('kubectl') {
-                            echo 'Deploy w/o IAST'
-                        }
+                        echo 'Deployment successful at http://34.66.139.87/login'
+                        echo 'Please use john@example.com:test as login'
                     }
                 }
                 stage('Deploy with Seeker IAST') {
                     steps {
-                        container('maven') {
-                            echo 'Deploy w IAST'
-                        }
+                        echo 'Deployment successful at http://34.66.139.87/login'
+                        echo 'Please use john@example.com:test as login'
                     }
                 }
             }
