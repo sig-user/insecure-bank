@@ -50,6 +50,7 @@ pipeline {
                             echo 'Build w SAST'
                             sh 'mkdir /root/.synopsys && \
                                 export POLARIS_HOME="/root/.synopsys" && \
+                                export POLARIS_SERVER_URL="https://sipse.polaris.synopsys.com" && \
                                 sourceDir=$(pwd) && \
                                 cd $POLARIS_HOME || exit && \
                                 wget "https://sipse.polaris.synopsys.com/api/tools/polaris_cli-linux64.zip" && \
