@@ -95,7 +95,7 @@ pipeline {
                         --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                         --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                         --blackduck.trust.cert=true \
-                        --detect.project.name="CloudBeesInsecureBank \
+                        --detect.project.name="CloudBeesInsecureBank" \
                         --detect.tools="DETECTOR" \
                         --detect.project.version.name="CloudBees_${BUILD_TAG}"'
                 }
