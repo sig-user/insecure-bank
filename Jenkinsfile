@@ -48,7 +48,8 @@ pipeline {
                     steps {
                         container('maven') {
                             echo 'Build w SAST'
-                            sh 'export POLARIS_HOME="/root/.synopsys" && \
+                            sh 'mkdir /root/.synopsys && \
+                                export POLARIS_HOME="/root/.synopsys" && \
                                 sourceDir=$(pwd) && \
                                 cd $POLARIS_HOME || exit && \
                                 wget "https://sipse.polaris.synopsys.com/api/tools/polaris_cli-linux64.zip" && \
