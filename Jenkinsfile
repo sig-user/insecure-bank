@@ -34,35 +34,32 @@ pipeline {
             }
         }
 
+        stage('Compile & Package') {
+            steps {
+                 container('maven') {
+                        echo 'Compiling the project'
+                        sh 'mvn clean package'
+                }
+            }
+        }
+
         stage('Commit Time Checks') { 
             //put your code scanner 
-            parallel {
-                stage('build') {
-                    steps {
-                        container('maven') {
-                            echo 'Build w/o SAST'
-                            sh 'mvn clean package'
-                        }
-                    }
-                }
-                stage('Static Code Analysis') {
-                    steps {
-                        container('maven') {
-                            echo 'Build w SAST'
-                            sh 'mkdir /root/.synopsys && \
-                                export POLARIS_HOME="/root/.synopsys" && \
-                                export POLARIS_SERVER_URL="https://sipse.polaris.synopsys.com" && \
-                                sourceDir=$(pwd) && \
-                                cd $POLARIS_HOME || exit && \
-                                wget "https://sipse.polaris.synopsys.com/api/tools/polaris_cli-linux64.zip" && \
-                                DIR=$(zipinfo -1 polaris_cli-linux64.zip | grep -oE "^[^/]+" | uniq) && \
-                                unzip polaris_cli-linux64.zip && rm polaris_cli-linux64.zip && \
-                                cd "${DIR}"/bin || exit && \
-                                polaris=$(pwd)/polaris && \
-                                cd "$sourceDir" || exit && \
-                                "$polaris" -c polaris.yml analyze 2>&1 | tee polaris_logs.log'
-                        }
-                    }
+            steps {
+                container('maven') {
+                    echo 'Build w SAST'
+                    sh 'mkdir /root/.synopsys && \
+                        export POLARIS_HOME="/root/.synopsys" && \
+                        export POLARIS_SERVER_URL="https://sipse.polaris.synopsys.com" && \
+                        sourceDir=$(pwd) && \
+                        cd $POLARIS_HOME || exit && \
+                        wget "https://sipse.polaris.synopsys.com/api/tools/polaris_cli-linux64.zip" && \
+                        DIR=$(zipinfo -1 polaris_cli-linux64.zip | grep -oE "^[^/]+" | uniq) && \
+                        unzip polaris_cli-linux64.zip && rm polaris_cli-linux64.zip && \
+                        cd "${DIR}"/bin || exit && \
+                        polaris=$(pwd)/polaris && \
+                        cd "$sourceDir" || exit && \
+                        "$polaris" -c polaris.yml analyze 2>&1 | tee polaris_logs.log'
                 }
             }
         }
@@ -98,9 +95,9 @@ pipeline {
                         --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                         --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                         --blackduck.trust.cert=true \
-                        --detect.project.name="CloudBeesDucky" \
+                        --detect.project.name="CloudBeesInsecureBank \
                         --detect.tools="DETECTOR" \
-                        --detect.project.version.name="DETECTOR_${BUILD_TAG}"'
+                        --detect.project.version.name="CloudBees_${BUILD_TAG}"'
                 }
             }
 

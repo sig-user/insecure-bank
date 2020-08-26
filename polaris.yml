@@ -3,11 +3,11 @@ install:
   coverity:
     version: latest
 project:
-  name: "SIG Insecure Bank - SSDC"
-  branch: "origin/master"
+  name: "gautambaghel/insecure-bank"
+  branch: "cloudbees_all"
   revision:
-    name: "insecure-bank-ssdc"
-    date: "2020-08-18T14:25:30Z"
+    name: "insecure-bank"
+    date: "2020-02-15T11:25:30Z"
   captureDir: .synopsys/polaris
 capture:
   coverity:
