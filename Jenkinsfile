@@ -27,27 +27,37 @@ pipeline {
  
     stages {
 
-        stage('Initial Notification') {
+        stage('Pipeline Start Notification') {
             steps {
                  //put webhook for your notification channel 
                  echo 'Pipeline Start Notification'
             }
         }
 
-        stage('Static Code Analysis') { 
+        stage('Build Phase') { 
             //put your code scanner 
             parallel {
-                stage('Build') {
+                stage('mvn package') {
                     steps {
                         container('maven') {
                             echo 'Build w/o SAST'
                         }
                     }
                 }
-                stage('SAST Analysis') {
+                stage('Static Code Analysis') {
                     steps {
                         container('maven') {
                             echo 'Build w SAST'
+                            sh 'export POLARIS_HOME="/root/.synopsys" && \
+                                sourceDir=$(pwd) && \
+                                cd $POLARIS_HOME || exit && \
+                                wget "https://sipse.polaris.synopsys.com/api/tools/polaris_cli-linux64.zip && \
+                                DIR=$(zipinfo -1 polaris_cli-linux64.zip | grep -oE '^[^/]+' | uniq) && \ 
+                                unzip polaris_cli-linux64.zip && rm polaris_cli-linux64.zip && \
+                                cd "${DIR}"/bin || exit && \
+                                polaris=$(pwd)/polaris && \
+                                cd "$sourceDir" || exit && \
+                                "$polaris" -c polaris.yml analyze 2>&1 | tee polaris_logs.log'
                         }
                     }
                 }
@@ -101,14 +111,14 @@ pipeline {
             }
         }
 
-        stage("Deploy to Staging w IAST"){
+        stage("Staging"){
             when {
                 branch 'cloudbees-ci'
             }
             parallel {
                 stage('Deploy') {
                     steps {
-                        container('maven') {
+                        container('kubectl') {
                             echo 'Deploy w/o IAST'
                         }
                     }
@@ -123,7 +133,7 @@ pipeline {
             }
         }
 
-        stage("Deploy to Production"){
+        stage("Production"){
             when {
                 branch 'master'
             }
