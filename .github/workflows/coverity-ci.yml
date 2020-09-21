@@ -13,6 +13,15 @@ jobs:
   build:
 
     runs-on: self-hosted
+    
+    env:
+      COVBIN: /opt/coverity/analysis/2020.06/bin
+      COVERITY_SERVER_URL: https://coverity.chuckaude.com:8443/
+      COVERITY_STREAM: hello-java
+      COV_USER: committer
+      COVERITY_PASSPHRASE: ${{ secrets.COVERITY_PASSPHRASE }}
+      BLDCMD: mvn -B clean compile
+      CHECKERS: --all --webapp-security
 
     steps:
     - uses: actions/checkout@v2
@@ -20,5 +29,10 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Coverity BAC
+      run: |
+        rm -rf idir
+        $COVBIN/cov-configure --java
+        $COVBIN/cov-build --dir idir $BLDCMD
+        $COVBIN/cov-analyze --dir idir --ticker-mode none --strip-path $PWD $CHECKERS
+        $COVBIN/cov-commit-defects --dir idir --ticker-mode none --url $COVERITY_SERVER_URL --stream $COVERITY_STREAM
