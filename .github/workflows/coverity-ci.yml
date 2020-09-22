@@ -37,3 +37,12 @@ jobs:
         $COVBIN/cov-analyze --dir idir --ticker-mode none --strip-path $PWD $CHECKERS
         $COVBIN/cov-commit-defects --dir idir --ticker-mode none --url $COVERITY_SERVER_URL --stream $COVERITY_STREAM
         $COVBIN/cov-format-errors --dir idir --json-output-v7 coverity-results.json
+    - name: Convert Coverity Results to SARIF
+      uses: gautambaghel/coverity-scan-results-to-sarif@1.0.0
+      with:
+        pipeline-results-json: coverity-results.json
+        output-results-sarif: coverity-results.sarif
+    - name: Upload SARIF file to GitHub UI
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: coverity-results.sarif
