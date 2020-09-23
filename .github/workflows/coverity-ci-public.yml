@@ -16,6 +16,10 @@ jobs:
     env:
       COVERITY_SERVER_URL: http://coverity.synopsys-alliances.com
       COVERITY_USER: gautam
+      COVBIN: cov-analysis/bin
+      COVERITY_STREAM: insecure-bank
+      BLDCMD: mvn -B clean compile
+      CHECKERS: --all --webapp-security
 
     steps:
     - uses: actions/checkout@v2
@@ -35,8 +39,25 @@ jobs:
           cd cov-analysis/
           curl -s -L --user $COVERITY_USER:${{ secrets.COVERITY_PASSPHRASE }} -o license.dat $COVERITY_SERVER_URL/downloadFile.htm?fn=license.dat
           curl -s -L --user $COVERITY_USER:${{ secrets.COVERITY_PASSPHRASE }} $COVERITY_SERVER_URL/downloadFile.htm?fn=cov-analysis-linux64-2020.09.tar.gz | tar -xvzf -
-          mv cov-analysis-linux64-2020.06 cov-analysis
+          mv cov-analysis-linux64-2020.09 cov-analysis
           cp license.dat ./cov-analysis/bin
 
     - name: ls to see
       run: ls -als && cd cov-analysis/ && ls -als
+
+    - name: Coverity BAC
+      run: |
+        rm -rf idir
+        $COVBIN/cov-build --dir idir $BLDCMD
+        $COVBIN/cov-analyze --dir idir --ticker-mode none --strip-path $PWD $CHECKERS
+        $COVBIN/cov-commit-defects --dir idir --ticker-mode none --url $COVERITY_SERVER_URL --stream $COVERITY_STREAM
+        $COVBIN/cov-format-errors --dir idir --json-output-v7 coverity-results.json
+    - name: Convert Coverity Results to SARIF
+      uses: gautambaghel/coverity-scan-results-to-sarif@1.0.0
+      with:
+        pipeline-results-json: coverity-results.json
+        output-results-sarif: coverity-results.sarif
+    - name: Upload SARIF file to GitHub UI
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: coverity-results.sarif
