@@ -32,7 +32,6 @@ jobs:
     - name: Coverity BAC
       run: |
         rm -rf idir
-        $COVBIN/cov-configure --java
         $COVBIN/cov-build --dir idir $BLDCMD
         $COVBIN/cov-analyze --dir idir --ticker-mode none --strip-path $PWD $CHECKERS
         $COVBIN/cov-commit-defects --dir idir --ticker-mode none --url $COVERITY_SERVER_URL --stream $COVERITY_STREAM
