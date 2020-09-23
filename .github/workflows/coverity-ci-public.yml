@@ -38,7 +38,7 @@ jobs:
           mkdir cov-analysis/
           cd cov-analysis/
           curl -s -L --user $COVERITY_USER:${{ secrets.COVERITY_PASSPHRASE }} -o license.dat $COVERITY_SERVER_URL/downloadFile.htm?fn=license.dat
-          curl -s -L --user $COVERITY_USER:${{ secrets.COVERITY_PASSPHRASE }} $COVERITY_SERVER_URL/downloadFile.htm?fn=cov-analysis-linux64-2020.09.tar.gz | tar -xvzf -
+          curl -s -L --user $COVERITY_USER:${{ secrets.COVERITY_PASSPHRASE }} $COVERITY_SERVER_URL/downloadFile.htm?fn=cov-analysis-linux64-2020.09.tar.gz | tar -xvf -
           mv cov-analysis-linux64-2020.09 cov-analysis
           cp license.dat ./cov-analysis/bin
 
