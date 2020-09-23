@@ -16,6 +16,7 @@ jobs:
     env:
       COVERITY_SERVER_URL: http://coverity.synopsys-alliances.com
       COVERITY_USER: gautam
+      COVERITY_PASSPHRASE: ${{ secrets.COVERITY_PASSPHRASE }}
       COVBIN: cov-analysis/2020.09/bin
       COVERITY_STREAM: insecure-bank
       BLDCMD: mvn -B clean compile
@@ -29,7 +30,6 @@ jobs:
       with:
         path: |
           cov-analysis/
-          idir/
         key: coverity-cache-ubuntu
 
     - name: Download Coverity
