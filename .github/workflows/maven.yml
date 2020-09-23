@@ -1,0 +1,33 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Cache testing
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      COVERITY_SERVER_URL: http://coverity.synopsys-alliances.com
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache Coverity Analysis
+      id: cache-coverity
+      uses: actions/cache@v2
+      with:
+        path: coverity
+        key: ubuntu-coverity
+
+    - name: Download Coverity
+      if: steps.cache-coverity.outputs.cache-hit != 'true'
+      run: curl -s -L --user admin:${{ secrets.COVERITY_PASSPHRASE }} -o license.dat $COVERITY_SERVER_URL/downloadFile.htm?fn=license.dat
+
+    - name: ls to see
+      run: ls -als
