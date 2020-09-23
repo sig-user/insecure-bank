@@ -39,7 +39,7 @@ jobs:
           cd cov-analysis/
           curl -s -L --user $COVERITY_USER:${{ secrets.COVERITY_PASSPHRASE }} -o license.dat $COVERITY_SERVER_URL/downloadFile.htm?fn=license.dat
           curl -s -L --user $COVERITY_USER:${{ secrets.COVERITY_PASSPHRASE }} $COVERITY_SERVER_URL/downloadFile.htm?fn=cov-analysis-linux64-2020.09.tar.gz | tar -xvf -
-          cp license.dat $COVBIN
+          cp license.dat 2020.09/bin/
 
     - name: ls to see
       run: ls -als && cd cov-analysis/ && ls -als
