@@ -16,7 +16,7 @@ jobs:
     env:
       COVERITY_SERVER_URL: http://coverity.synopsys-alliances.com
       COVERITY_USER: gautam
-      COVBIN: cov-analysis/bin
+      COVBIN: cov-analysis/2020.09/bin
       COVERITY_STREAM: insecure-bank
       BLDCMD: mvn -B clean compile
       CHECKERS: --all --webapp-security
@@ -39,7 +39,6 @@ jobs:
           cd cov-analysis/
           curl -s -L --user $COVERITY_USER:${{ secrets.COVERITY_PASSPHRASE }} -o license.dat $COVERITY_SERVER_URL/downloadFile.htm?fn=license.dat
           curl -s -L --user $COVERITY_USER:${{ secrets.COVERITY_PASSPHRASE }} $COVERITY_SERVER_URL/downloadFile.htm?fn=cov-analysis-linux64-2020.09.tar.gz | tar -xvf -
-          mv 2020.09/* cov-analysis/
           cp license.dat $COVBIN
 
     - name: ls to see
