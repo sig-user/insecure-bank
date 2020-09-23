@@ -4,8 +4,6 @@
 name: Insecure Bank CI with Coverity on Private runner
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
