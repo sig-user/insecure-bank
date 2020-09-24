@@ -46,7 +46,7 @@ jobs:
         rm -rf idir
         $COVBIN/cov-build --dir idir $BLDCMD
         $COVBIN/cov-analyze --dir idir --ticker-mode none --strip-path $PWD $CHECKERS
-        $COVBIN/cov-commit-defects --dir idir --ticker-mode none --url $COVERITY_SERVER_URL --stream $COVERITY_STREAM --encryption none
+        $COVBIN/cov-commit-defects --dir idir --ticker-mode none --url $COVERITY_SERVER_URL --stream $COVERITY_STREAM --encryption none --user $COVERITY_USER --password $COVERITY_PASSPHRASE
         $COVBIN/cov-format-errors --dir idir --json-output-v7 coverity-results.json
 
     - name: Convert Coverity Results to SARIF
