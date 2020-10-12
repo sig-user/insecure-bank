@@ -15,7 +15,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Convert Coverity Results to SARIF
-        uses: gautambaghel/coverity-scan-results-to-sarif@a267db7f775cb16dcfd3c7e78dd21bcfb31572d8
+        uses: gautambaghel/coverity-scan-results-to-sarif@d89ab079e2f78377ad410e1f5d006858136a9320
         with:
           pipeline-results-json: coverity-results-desktop.json
           output-results-sarif: coverity-results.sarif
