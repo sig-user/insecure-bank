@@ -5,9 +5,9 @@ name: Insecure Bank CI with Coverity on Public runner
 
 on:
   push:
-    branches: [ master ]
+    branches: [ coverity-hardcoded ]
   pull_request:
-    branches: [ master ]
+    branches: [ coverity-hardcoded  ]
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       COVERITY_SERVER_URL: http://coverity.synopsys-alliances.com
       COVERITY_USER: gautam
       COVERITY_PASSPHRASE: ${{ secrets.COVERITY_PASSPHRASE }}
-      COVBIN: cov-analysis/2020.09/bin
+      COVBIN: cov-analysis/2020.12/bin
       COVERITY_STREAM: insecure-bank
       BLDCMD: mvn -B clean compile
       CHECKERS: --all --webapp-security
@@ -38,8 +38,8 @@ jobs:
           mkdir cov-analysis/
           cd cov-analysis/
           curl -k --user $COVERITY_USER:$COVERITY_PASSPHRASE -o license.dat $COVERITY_SERVER_URL/downloadFile.htm?fn=license.dat
-          curl -k --user $COVERITY_USER:$COVERITY_PASSPHRASE $COVERITY_SERVER_URL/downloadFile.htm?fn=cov-analysis-linux64-2020.09.tar.gz | tar -xvf -
-          cp license.dat 2020.09/bin/
+          curl -k --user $COVERITY_USER:$COVERITY_PASSPHRASE $COVERITY_SERVER_URL/downloadFile.htm?fn=cov-analysis-linux64-2020.12.tar.gz | tar -xvf -
+          cp license.dat 2020.12/bin/
 
     - name: Coverity BAC
       run: |
