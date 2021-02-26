@@ -5,9 +5,9 @@ name: Insecure Bank CI with Coverity on Public runner
 
 on:
   push:
-    branches: [ coverity-hardcoded ]
+    branches: [ coverity-ci-public ]
   pull_request:
-    branches: [ coverity-hardcoded  ]
+    branches: [ coverity-ci-public  ]
 
 jobs:
   build:
