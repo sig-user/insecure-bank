@@ -1,0 +1,43 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: insecure-bank-deployment
+  labels:
+    app: insecure-bank
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insecure-bank
+  template:
+    metadata:
+      labels:
+        app: insecure-bank
+    spec:
+      containers:
+        - name: insecure-bank
+          image: 'quay.io/opssighttestorg/insecure-bank:seeker'
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "250m"
+              memory: 1Gi
+            requests:
+              cpu: "125m"
+              memory: 512Mi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: insecure-bank-service
+  labels:
+    app: insecure-bank
+spec:
+  selector:
+    app: insecure-bank
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
