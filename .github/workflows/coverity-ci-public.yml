@@ -17,7 +17,9 @@ jobs:
       COVERITY_SERVER_URL: http://coverity.synopsys-alliances.com
       COVERITY_USER: gautam
       COVERITY_PASSPHRASE: ${{ secrets.COVERITY_PASSPHRASE }}
-      COVBIN: cov-analysis/2020.12/bin
+      COVERITY_VERSION: 2021.03
+      COV: cov-analysis/cov-analysis-linux64-2021.03
+      COVBIN: cov-analysis/cov-analysis-linux64-2021.03/bin
       COVERITY_STREAM: insecure-bank
       BLDCMD: mvn -B clean compile
       CHECKERS: --all --webapp-security
@@ -38,9 +40,8 @@ jobs:
           mkdir cov-analysis/
           cd cov-analysis/
           curl -k --user $COVERITY_USER:$COVERITY_PASSPHRASE -o license.dat $COVERITY_SERVER_URL/downloadFile.htm?fn=license.dat
-          curl -k --user $COVERITY_USER:$COVERITY_PASSPHRASE $COVERITY_SERVER_URL/downloadFile.htm?fn=cov-analysis-linux64-2020.12.tar.gz
-          tar -xvf cov-analysis-linux64-2020.12.tar.gz
-          cp license.dat cov-analysis-linux64-2020.12/bin/
+          curl -k --user $COVERITY_USER:$COVERITY_PASSPHRASE $COVERITY_SERVER_URL/downloadFile.htm?fn=cov-analysis-linux64-${COVERITY_VERSION}.tar.gz | tar -xvf -
+          cp license.dat cov-analysis-linux64-${COVERITY_VERSION}/bin/
 
     - name: Coverity BAC
       run: |
@@ -49,12 +50,7 @@ jobs:
         $COVBIN/cov-analyze --dir idir --ticker-mode none --strip-path $PWD $CHECKERS
         $COVBIN/cov-commit-defects --dir idir --ticker-mode none --url $COVERITY_SERVER_URL --stream $COVERITY_STREAM --encryption none --user $COVERITY_USER --password $COVERITY_PASSPHRASE
         $COVBIN/cov-format-errors --dir idir --json-output-v7 coverity-results.json
-
-    - name: Convert Coverity Results to SARIF
-      uses: gautambaghel/coverity-scan-results-to-sarif@1.0.0
-      with:
-        pipeline-results-json: coverity-results.json
-        output-results-sarif: coverity-results.sarif
+        $COV/node/bin/node $COV/SARIF/cov-format-sarif-for-github.js --githubUrl https://github.com --inputFile coverity-results.json --outputFile coverity-results.sarif --repoName $GITHUB_REPOSITORY --checkoutPath $GITHUB_REPOSITORY $PWD $GITHUB_SHA
         
     - name: Upload SARIF file to GitHub UI
       uses: github/codeql-action/upload-sarif@v1
