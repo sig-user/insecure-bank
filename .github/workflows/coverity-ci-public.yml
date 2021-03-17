@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       COVERITY_SERVER_URL: http://coverity.synopsys-alliances.com
-      COVERITY_USER: gautam
+      COVERITY_USER: ${{ secrets.COVERITY_USER }}
       COVERITY_PASSPHRASE: ${{ secrets.COVERITY_PASSPHRASE }}
       COVERITY_VERSION: 2021.03
       COV: cov-analysis/cov-analysis-linux64-2021.03
