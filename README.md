@@ -29,4 +29,4 @@ You can then access the bank application here: http://localhost:8080/
 See the file [src/main/resources/db/dataload.sql](src/main/resources/db/dataload.sql) for all example accounts. Here is one:
 
 - username: john@example.com
-- password: test
+- password: D3mo!
