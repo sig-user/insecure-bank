@@ -10,7 +10,7 @@ capture:
     cleanCommands:
     - shell: [mvn, -B, -f, pom.xml, clean]
     buildCommands:
-    - shell: [mvn, -B, -f, pom.xml, install]
+    - shell: [mvn, -B, -f, pom.xml, install, '-DskipTests']
   fileSystem:
     ears:
       extensions: [ear]
