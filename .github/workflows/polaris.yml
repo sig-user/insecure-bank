@@ -11,10 +11,17 @@ jobs:
     env:
       POLARIS_SERVER_URL:  ${{ secrets.POLARIS_URL }}
       POLARIS_ACCESS_TOKEN:  ${{ secrets.POLARIS_TOKEN }}
+      POLARIS_FF_ENABLE_COVERITY_INCREMENTAL: 'true'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+      - name: Get changed files
+        id: changes
+        # Set outputs using the command.
+        run: |
+          echo "::set-output name=all::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)"
+          echo "::set-output name=ts::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep .ts$ | xargs)"
   
       - name: Polaris analysis
         run:
-          polaris -c polaris-incremental.yml analyze -w
+          polaris -c polaris-incremental.yml analyze -w --incremental incremental-demo-files.txt
