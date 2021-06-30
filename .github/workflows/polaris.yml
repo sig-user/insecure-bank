@@ -8,12 +8,13 @@ jobs:
       credentials:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    env:
+      POLARIS_SERVER_URL:  ${{ secrets.POLARIS_URL }}
+      POLARIS_ACCESS_TOKEN:  ${{ secrets.POLARIS_TOKEN }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
   
       - name: Polaris analysis
-        run: |
-                  export POLARIS_SERVER_URL=${{ secrets.POLARIS_URL }}
-                  export POLARIS_ACCESS_TOKEN=${{ secrets.POLARIS_TOKEN }}
-                  polaris analyze
+        run:
+          polaris -c polaris-incremental.yml analyze -w
